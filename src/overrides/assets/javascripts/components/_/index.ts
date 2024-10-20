@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2021 Martin Donath <martin.donath@squidfunk.com>
+ * Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -20,7 +20,7 @@
  * IN THE SOFTWARE.
  */
 
-import { getElementOrThrow, getElements } from "~/browser"
+import { getElement, getElements } from "~/browser"
 
 /* ----------------------------------------------------------------------------
  * Types
@@ -33,6 +33,7 @@ export type ComponentType =
   | "iconsearch"                       /* Icon search */
   | "iconsearch-query"                 /* Icon search input */
   | "iconsearch-result"                /* Icon search results */
+  | "iconsearch-select"                /* Icon search select */
   | "sponsorship"                      /* Sponsorship */
   | "sponsorship-count"                /* Sponsorship count */
   | "sponsorship-total"                /* Sponsorship total */
@@ -62,6 +63,7 @@ interface ComponentTypeMap {
   "iconsearch": HTMLElement            /* Icon search */
   "iconsearch-query": HTMLInputElement /* Icon search input */
   "iconsearch-result": HTMLElement     /* Icon search results */
+  "iconsearch-select": HTMLSelectElement
   "sponsorship": HTMLElement           /* Sponsorship */
   "sponsorship-count": HTMLElement     /* Sponsorship count */
   "sponsorship-total": HTMLElement     /* Sponsorship total */
@@ -84,7 +86,7 @@ interface ComponentTypeMap {
 export function getComponentElement<T extends ComponentType>(
   type: T, node: ParentNode = document
 ): ComponentTypeMap[T] {
-  return getElementOrThrow(`[data-mdx-component=${type}]`, node)
+  return getElement(`[data-mdx-component=${type}]`, node)
 }
 
 /**
